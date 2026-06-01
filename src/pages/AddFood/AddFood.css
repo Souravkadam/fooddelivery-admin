@@ -1,0 +1,36 @@
+.add-food-img-upload {
+  display: flex;
+  align-items: flex-start;
+}
+
+.add-food-img-label {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 180px;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  background: #fafafa;
+  transition: border-color 0.2s, background 0.2s;
+  overflow: hidden;
+}
+
+.add-food-img-label:hover {
+  border-color: #0d6efd;
+  background: #f0f4ff;
+}
+
+.add-food-placeholder {
+  width: 64px;
+  height: 64px;
+  opacity: 0.4;
+}
+
+.add-food-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

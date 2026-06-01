@@ -1,0 +1,11 @@
+.food-list-img {
+  object-fit: cover;
+  border: 1px solid #eee;
+}
+
+.food-list-desc {
+  max-width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
