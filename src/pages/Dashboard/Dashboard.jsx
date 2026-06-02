@@ -200,8 +200,9 @@ export default function Dashboard() {
         const users  = uRes.status==="fulfilled" ? (uRes.value.data||[]) : [];
         const foods  = fRes.status==="fulfilled" ? (fRes.value.data||[]) : [];
 
-        console.log("Orders sample:", orders[0]); // debug — check createdAt format
+        console.log("Orders sample:", orders[0]);
         console.log("Total orders:", orders.length);
+        console.log("Order statuses:", orders.map(o => o.orderStatus));
 
         setRecentOrders([...orders].reverse().slice(0,10));
         setChartData(makeDailyData(orders, DAYS));
@@ -239,14 +240,19 @@ export default function Dashboard() {
     "out for delivery": "#0dcaf0",
     "delivered":        "#198754",
     "cancelled":        "#dc3545",
+    "pending":          "#fd7e14",
   };
+
   const pieData = Object.entries(s.statusMap||{})
     .filter(([,v]) => v > 0)
     .map(([k,v]) => ({
       name: k.charAt(0).toUpperCase() + k.slice(1),
       value: v,
-      color: statusColors[k] || "#6f42c1",
+      color: statusColors[k.toLowerCase()] || "#6f42c1",
     }));
+
+  // Debug log
+  console.log("pieData:", pieData, "statusMap:", s.statusMap);
 
   return (
     <div className="dashboard">
