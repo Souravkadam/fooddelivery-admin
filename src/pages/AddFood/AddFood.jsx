@@ -5,6 +5,14 @@ import addimage from "../../assets/addimage.png";
 import "./AddFood.css";
 
 const CATEGORIES = [
+  // These match the Frontend explore menu icons exactly
+  "Biryani",
+  "Burger",
+  "ICE cream",
+  "Pizza",
+  "Rolls",
+  "Salad",
+  "Chicken",
   // General Meal Types
   "Main Course",
   "Appetizers",
@@ -17,7 +25,6 @@ const CATEGORIES = [
   "Lunch",
   "Dinner",
   "Soups",
-  "Salads",
   "Side Dishes",
   "Snacks",
   // Cuisines & Regional
@@ -32,8 +39,6 @@ const CATEGORIES = [
   "Mediterranean",
   "Street Food",
   // Specific Food Groups
-  "Pizzas",
-  "Burgers",
   "Sandwiches",
   "Wraps & Rolls",
   "Biryani & Pulao",
@@ -54,7 +59,6 @@ const CATEGORIES = [
   "Cold Beverages",
   "Shakes & Smoothies",
   "Mocktails",
-  "Ice Creams",
   "Baked Goods & Pastries",
   // Specialty / Dietary
   "Healthy Eats",
@@ -213,17 +217,20 @@ const AddFood = () => {
                   required
                 >
                   <option value="">Select category...</option>
+                  <optgroup label="── Popular (with icons on website) ──">
+                    {["Biryani","Burger","ICE cream","Pizza","Rolls","Salad","Chicken"].map(c=><option key={c} value={c}>{c}</option>)}
+                  </optgroup>
                   <optgroup label="── General Meal Types ──">
-                    {["Main Course","Appetizers","Starters","Desserts","Beverages","Fast Food","Breakfast","Brunch","Lunch","Dinner","Soups","Salads","Side Dishes","Snacks"].map(c=><option key={c} value={c}>{c}</option>)}
+                    {["Main Course","Appetizers","Starters","Desserts","Beverages","Fast Food","Breakfast","Brunch","Lunch","Dinner","Soups","Side Dishes","Snacks"].map(c=><option key={c} value={c}>{c}</option>)}
                   </optgroup>
                   <optgroup label="── Cuisines & Regional ──">
                     {["North Indian","South Indian","Indo-Chinese","Italian","Continental","Mexican","American","Asian","Mediterranean","Street Food"].map(c=><option key={c} value={c}>{c}</option>)}
                   </optgroup>
                   <optgroup label="── Specific Food Groups ──">
-                    {["Pizzas","Burgers","Sandwiches","Wraps & Rolls","Biryani & Pulao","Breads & Naan","Rice & Noodles","Pasta","Seafood","Tandoori & Kebabs","Thalis","Chaat","Curries & Gravies","Dals & Lentils","Fried Chicken","Momos & Dumplings","Steaks & Grills"].map(c=><option key={c} value={c}>{c}</option>)}
+                    {["Sandwiches","Wraps & Rolls","Biryani & Pulao","Breads & Naan","Rice & Noodles","Pasta","Seafood","Tandoori & Kebabs","Thalis","Chaat","Curries & Gravies","Dals & Lentils","Fried Chicken","Momos & Dumplings","Steaks & Grills"].map(c=><option key={c} value={c}>{c}</option>)}
                   </optgroup>
                   <optgroup label="── Drinks & Sweets ──">
-                    {["Hot Beverages (Tea/Coffee)","Cold Beverages","Shakes & Smoothies","Mocktails","Ice Creams","Baked Goods & Pastries"].map(c=><option key={c} value={c}>{c}</option>)}
+                    {["Hot Beverages (Tea/Coffee)","Cold Beverages","Shakes & Smoothies","Mocktails","Baked Goods & Pastries"].map(c=><option key={c} value={c}>{c}</option>)}
                   </optgroup>
                   <optgroup label="── Specialty / Dietary ──">
                     {["Healthy Eats","Vegan Options","Combo Meals"].map(c=><option key={c} value={c}>{c}</option>)}
