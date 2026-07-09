@@ -1,6 +1,21 @@
 import axios from "axios";
 import { API_BASE_URL } from "../util/constants";
 
+// ── Global 401 interceptor — auto logout on session expiry ────────────────────
+axios.interceptors.response.use(
+  (res) => res,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Clear stored session
+      localStorage.removeItem("adminToken");
+      localStorage.removeItem("adminName");
+      // Redirect to login — full page reload clears React state too
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);
+
 // ── Auth header helper ────────────────────────────────────────────────────────
 const authHeader = () => {
   const token = localStorage.getItem("adminToken");

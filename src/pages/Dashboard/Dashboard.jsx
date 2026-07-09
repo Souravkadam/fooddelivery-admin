@@ -202,9 +202,19 @@ export default function Dashboard() {
 
         // Surface any failures as warnings (partial data still shown)
         const errs = [];
-        if (oRes.status==="rejected") errs.push(`Orders: ${oRes.reason?.response?.data?.message || oRes.reason?.message || "failed"}`);
-        if (uRes.status==="rejected") errs.push(`Users: ${uRes.reason?.response?.data?.message || uRes.reason?.message || "failed"}`);
-        if (fRes.status==="rejected") errs.push(`Foods: ${fRes.reason?.response?.data?.message || fRes.reason?.message || "failed"}`);
+        if (oRes.status==="rejected") {
+          const msg = oRes.reason?.response?.data?.message || oRes.reason?.message || "failed";
+          // 401 is handled by interceptor — skip showing error
+          if (oRes.reason?.response?.status !== 401) errs.push(`Orders: ${msg}`);
+        }
+        if (uRes.status==="rejected") {
+          const msg = uRes.reason?.response?.data?.message || uRes.reason?.message || "failed";
+          if (uRes.reason?.response?.status !== 401) errs.push(`Users: ${msg}`);
+        }
+        if (fRes.status==="rejected") {
+          const msg = fRes.reason?.response?.data?.message || fRes.reason?.message || "failed";
+          if (fRes.reason?.response?.status !== 401) errs.push(`Foods: ${msg}`);
+        }
         if (errs.length > 0) setError(`Some data failed to load: ${errs.join(" | ")}`);
 
         console.log("Orders sample:", orders[0]);
