@@ -200,6 +200,13 @@ export default function Dashboard() {
         const users  = uRes.status==="fulfilled" ? (uRes.value.data||[]) : [];
         const foods  = fRes.status==="fulfilled" ? (fRes.value.data||[]) : [];
 
+        // Surface any failures as warnings (partial data still shown)
+        const errs = [];
+        if (oRes.status==="rejected") errs.push(`Orders: ${oRes.reason?.response?.data?.message || oRes.reason?.message || "failed"}`);
+        if (uRes.status==="rejected") errs.push(`Users: ${uRes.reason?.response?.data?.message || uRes.reason?.message || "failed"}`);
+        if (fRes.status==="rejected") errs.push(`Foods: ${fRes.reason?.response?.data?.message || fRes.reason?.message || "failed"}`);
+        if (errs.length > 0) setError(`Some data failed to load: ${errs.join(" | ")}`);
+
         console.log("Orders sample:", orders[0]);
         console.log("Total orders:", orders.length);
         console.log("Order statuses:", orders.map(o => o.orderStatus));
@@ -228,6 +235,9 @@ export default function Dashboard() {
   if (error) return (
     <div className="alert alert-danger m-4">
       <i className="bi bi-exclamation-triangle me-2"></i>{error}
+      <button className="btn btn-sm btn-outline-danger ms-3" onClick={() => window.location.reload()}>
+        <i className="bi bi-arrow-clockwise me-1"></i>Retry
+      </button>
     </div>
   );
 

@@ -27,8 +27,15 @@ const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [token, setToken] = useState(localStorage.getItem("adminToken") || "");
 
-  const handleLogin  = (t) => setToken(t);
-  const handleLogout = () => setToken("");
+  const handleLogin  = (t) => {
+    localStorage.setItem("adminToken", t);
+    setToken(t);
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("adminToken");
+    localStorage.removeItem("adminName");
+    setToken("");
+  };
 
   const isAuthenticated = Boolean(token);
 
